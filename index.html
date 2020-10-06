@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+        }
+        
+        body{
+            margin: 0;
+        }
+        
+        .temp{
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .degree{
+            color:  #00c4c4;
+            padding: 50px;
+            font-size: 55px;
+        }
+
+        .descrpt{
+            text-align: center;
+            color:  #00c4c4;
+        }
+
+        .temp-1{
+            font-size: 95px;
+        }
+        
+        .title{
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 2px;
+            background-color: #3b3b3b;
+            height: 100px;
+            color: #cecece;
+            font-size: 50px;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+        }
+
+        #title:hover{
+            color: #f3f3f3;
+        }
+
+        .footer-txt{
+            font-family: 'Poppins', sans-serif;
+            background-color: #3b3b3b;
+            min-height: 90px;
+            color: #dfdfdf;
+            font-size: 30px;
+            align-items: center;
+            flex-direction: column;
+            cursor: default;
+            justify-content: center;
+        }
+
+        small{
+            font-size: 15px;
+        }
+
+        a{
+            color: #dfdfdf;
+        }
+
+        a:hover{
+            color: #00c4c4;
+            text-decoration: none;
+        }
+
+        .location{
+            color: black;
+        }
+        
+        i{
+            margin-left: 2px;
+            color: #f10808;
+        }
+        img{
+            padding-bottom: 25px;
+            scale: 1.1;
+            -webkit-user-drag: none;
+            
+        }
+
+        .cursor{
+            border-right: 0.5px solid #ffffff;
+            animation:cursorEffect 300ms steps(40) infinite;
+        }
+
+        .spinner-border{
+            display: flex;
+            align-items: center;
+            margin: 50px;
+            scale: 1.1;
+            color:  #00c4c4;
+        }
+
+        .txt-element{
+            color: #00c4c4;
+            font-weight: 500;
+        }
+        
+        @keyframes cursorEffect {
+            from { border-color: #eeeeee;}
+            to { border-color: transparent;}
+        }
+
+        @media all and (max-width: 800px){
+            
+            .forecast{
+                display: flex;
+                flex-direction: row;
+            }
+        } 
+
+        @media all and (max-width: 500px){
+            .details{
+                flex-direction: column;
+                
+            }
+            .spinner-border{
+                margin-bottom: 150px;
+            }
+
+             .degree{
+                font-size: 75px;
+            } 
+            
+        }
+        input{
+            border: none;
+            border-radius: 4px;
+            border: 2px solid #8d8d8d;
+            padding: 5px;
+            padding-left: 7px;
+        }
+        input:focus{
+            border-color: #ff4754;
+        }
+        .place-holder{
+            position: absolute;
+            color: #f9f9f9;
+            top: 5px;
+            background-color: white;
+            left: 40px;
+            padding-left: 2px;
+            padding-right: 3px;
+            font-size: 1rem;
+            user-select: none;
+            transition: top 0.1s ease-in-out, font-size 0.1s ease-in-out, color 0.1s ease-in-out;
+        }
+
+        input:focus + .place-holder,
+        input:not(:placeholder-shown) + .place-holder{
+            top: -11px;
+            font-size: 0.9rem;
+            color: #ff4754;
+        }
+
+        input:not(:focus) + .place-holder{
+            color: #7a7a7a56;
+        }
+        .btn{
+            position: absolute;
+            left: 239px;
+            top: -46px;
+        }
+    </style>
+
+    <header class="d-flex container-fluid title text-center mb-3 shadow p-3 mb-5">
+        <span id="title">Weather</span>
+    </header>
+    
+    <!-- USER INPUT -->
+    <div class="input-group mb-3 container">
+        <div class="container">
+            <input type="text" class="usr-input" placeholder=" ">
+            <p class="place-holder">Enter City</p>
+        </div>
+        <div class="input-group mt-2">
+            <button class="btn btn-success" type="button">Submit</button>
+        </div>
+    </div>
+    
+    <div class="container mb-3 icon-container"> 
+        <i></i>
+        <span class="location"></span>
+        </div>
+    </div>
+
+    <!-- 1st Day // Current -->
+
+    <div class="container">
+        <div class="card mb-3 shadow p-3 mb-5 bg-white rounded" style="max-width: 1200px;">
+            <div class="row no-gutters">
+                <div class="col-md-4  d-flex temp">
+                    
+                        <span class="degree temp-1"></span>               
+                        <span class="icon icon-1 spinner-border" style="font-size: 20px;"></span>   
+                        <span class="descrpt descrpt-1" style="font-size: 25px;"></span>
+                    
+                </div>
+
+                <div class="col-md-8 d-flex details">
+                    <div class="card-body">
+                        <h5 class="card-title date-1">Tuesssday, 15/09/2020</h5>
+                        <p class="card-text" style="max-width: 325px;">Humidity: <span class="float-right humidity-1"></span> </p><hr style="max-width: 325px;">
+                        <p class="card-text" style="max-width: 325px;">Chances of rain: <span class="float-right rain-1"></span> </p><hr style="max-width: 325px;">
+                        <p class="card-text" style="max-width: 325px;">Wind:<span class="float-right  wind-1"></span> </p><hr style="max-width: 325px;">
+                        <p class="card-text" style="max-width: 325px;">Sunrise:<span class="float-right rise-1"></span> </p><hr style="max-width: 325px;">
+                        <p class="card-text" style="max-width: 325px;">Sunset:<span class="float-right set-1"></span> </p><hr style="max-width: 325px;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Additional Information</h5>
+                        <p class="card-text" style="max-width: 325px;">UV:<span class="float-right uv"></span> </p><hr style="max-width: 325px;">
+                        <p class="card-text" style="max-width: 325px;">Chances of snow: <span class="float-right snow"></span> </p><hr style="max-width: 325px;">
+                        <p class="card-text" style="max-width: 325px;">Wind Direction: <span class="float-right wind-dir"></span> </p><hr style="max-width: 325px;">
+                        <p class="card-text" style="max-width: 325px;">Moonrise:<span class="float-right moon-rise"></span> </p><hr style="max-width: 325px;">
+                        <p class="card-text" style="max-width: 325px;">Moonset:<span class="float-right moon-set"></span> </p><hr style="max-width: 325px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2nd Day -->
+
+        <div class="card forecast mb-3 shadow p-3 mb-5 bg-white rounded float-right" style="max-width: 540px;">
+            <div class="row no-gutters secondary-card">
+                <div class="col-md-4 d-flex temp">                    
+                    <span class="degree temp-2"></span>
+                    <span class="icon icon-2 spinner-border" style="font-size: 20px;"></span>
+                    <span class="descrpt descrpt-2" style="font-size: 25px;"></span>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title date-2">Wednesday, 16/09/2020</h5>
+                        <p class="card-text">Humidity:<span class="float-right humidity-2"></span></p><hr>
+                        <p class="card-text">Chances of rain:<span class="float-right rain-2"></span></p><hr>
+                        <p class="card-text">Wind:<span class="float-right wind-2"></span></p><hr>
+                        <p class="card-text">Sunrise:<span class="float-right rise-2"></span></p><hr>
+                        <p class="card-text">Sunset:<span class="float-right set-2"></span></p><hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3rd Day -->
+
+        <div class="card  mb-3 shadow p-3 mb-5 bg-white rounded" style="max-width: 540px;">
+            <div class="row no-gutters secondary-card">
+                <div class="col-md-4 d-flex temp">   
+                    <span class="degree temp-3"></span>
+                    <span class="icon icon-3 spinner-border" style="font-size: 20px;"></span>
+                    <span class="descrpt descrpt-3" style="font-size: 25px;"></span>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title date-3">Thursday, 17/09/2020</h5>
+                        <p class="card-text">Humidity:<span class="float-right humidity-3"></span></p><hr>
+                        <p class="card-text">Chances of rain:<span class="float-right rain-3"></span></p><hr>
+                        <p class="card-text">Wind:<span class="float-right wind-3"></span></p><hr>
+                        <p class="card-text">Sunrise:<span class="float-right rise-3"></span></p><hr>
+                        <p class="card-text">Sunset:<span class="float-right set-3"></span></p><hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    
+    <footer class="d-flex container-fluid footer-txt text-center shadow p-3">
+        <span>Developed with<span class="txt-element" data-wait="2000" data-words='["HTML.", "CSS.", "Bootstrap.", "JavaScript."]'></span>
+        </span>
+
+        <small>By <a href="https://www.instagram.com/nadeem0_0/?hl=en">{Nadeem}</a></small> 
+    </footer>
+
+    <script src="main.js"></script>                  
+    </body>
+</html>
