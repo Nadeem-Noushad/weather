@@ -1,3 +1,6 @@
-#Weather Application
+Weather Application
 
 Displays 3-day weather forecast
+
+
+API from weatherapi.com
